@@ -7,7 +7,8 @@ class GridWorld():
 		
 		self.row = row
 		self.col = col
-		self.defaultReward=0
+		self.dim = (row,col)
+		self.defaultReward=defaultReward
 
 		self.states = range(row*col)
 		self.rewards = setRewards(rewards)
@@ -80,5 +81,9 @@ class GridWorld():
 
 			action = policy(startState)
 			newState, reward = transition(startState, action)
-			states.append()
+			states.append(newState)
+			actions.append(action)
+			rewards.append(reward)
+			
+		return states, actions, rewards
 	
