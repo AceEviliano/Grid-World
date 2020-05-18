@@ -1,20 +1,15 @@
+import pathlib
+from setuptools import setup
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
 
 # text of the README file
-README = (HERE/'RAEDME.md').read_text()
+README = (HERE/'README.md').read_text()
 
 setup(
-	name = 'GridWorld'
-	version = '1.0.0'
-	description = 'A simple API to variations of gridworld used for classic RL experiments'
-
-	long_description = README
-
-	
-
-)
-
-setup(
-    name = 'GridWorld',
+    name = 'Grid-World',
     version = '1.0.0',
     description = 'A simple API to variations of gridworld used for classic RL experiments',
     long_description = README,
@@ -22,9 +17,8 @@ setup(
     url = 'https://github.com/AceEviliano/Grid-World',
     author = 'Rishi S Rao',
     author_email = 'harishi.ace@gmail.com',
-    license = 'MIT',
+    license = 'GPLv3',
     classifiers=[
-        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
