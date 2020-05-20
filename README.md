@@ -10,13 +10,9 @@ This repository aims to build an API for the gridworld and it's variations most 
 OS X & Linux:
 
 ```sh
-
-```
-
-Windows:
-
-```sh
-
+git clone https://github.com/AceEviliano/Grid-World
+cd Grid-World
+pip install .
 ```
 
 ## Usage example
@@ -36,13 +32,17 @@ Will update once ready
 * 0.0.1
     * Work in progress
 
+* 0.1.0
+    * Setup a functional Grid World for use
+
+
 ## Meta
 
 Rishi S Rao – harishi.ace@gmail.com
 
-Yet to decide a license. See ``LICENSE`` for more information.
+Project is under GPLv3.0 Lincense. See ``LICENSE`` for more information.
 
-[https://github.com/AceEviliano/Grid-World]([https://github.com/AceEviliano/Grid-World)
+[https://github.com/AceEviliano/Grid-World](https://github.com/AceEviliano/Grid-World)
 
 ## Contributing
 
