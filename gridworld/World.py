@@ -3,17 +3,18 @@ import matplotlib.pyplot as plt
 
 class GridWorld():
 
-    def __init__(self, row=4, col=4, rewards={}, defaultReward=0, transitionTable=None):
+    def __init__(self, row=4, col=4, rewards={},
+                 defaultReward=0, transitionTable=None):
 
         self.row = row
         self.col = col
-        self.dim = (row,col)
-        self.defaultReward=defaultReward
+        self.dim = (row, col)
+        self.defaultReward = defaultReward
 
         self.actions = range(4)
-        self.states = range(row*col)
+        self.states = range(row * col)
         self.rewards = self.setRewards(rewards)
-        self.transitionTable = transitionTable if transitionTable is not None else self.setTransitions()       
+        self.transitionTable = transitionTable if transitionTable is not None else self.setTransitions()
         
         return
 
@@ -21,10 +22,11 @@ class GridWorld():
 
         rewardTable = []
 
-        for state in self.states :
-            try :
+        for state in self.states:
+        
+            try:
                 r = rewards[state]
-            except :
+            except:
                 r = self.defaultReward
 
             rewardTable.append(r)
@@ -35,24 +37,24 @@ class GridWorld():
 
         transitionTable = []
 
-        for state in self.states :
+        for state in self.states:
             stateTransitions = [ self.transitionFunction(state, action) for action in self.actions ]
             transitionTable.append(stateTransitions)
 
         return np.array(transitionTable)
 
     def transitionFunction(self, state, action):
-        
+
         row, col = self.dim
         
-        if action == 0 :
+        if action == 0:
             new_state = state - 1
-            if new_state//col != state//col :
+            if new_state // col != state // col:
                 new_state = state
 
-        elif action == 1 :
+        elif action == 1:
             new_state = state + 1
-            if new_state//col != state//col :
+            if new_state // col != state // col:
                 new_state = state
 
         # when up or down action is taken
@@ -61,13 +63,13 @@ class GridWorld():
 
         if action == 2:
             new_state = state - row
-            if new_state < 0 or new_state > row*col:
+            if new_state < 0 or new_state > row * col:
                 new_state = state
 
         elif action == 3:
-            new_state = state + row   
-            if new_state < 0 or new_state >= row*col:
-                    new_state = state
+            new_state = state + row
+            if new_state < 0 or new_state >= row * col:
+                new_state = state
 
         return new_state
 
@@ -82,10 +84,11 @@ class GridWorld():
         actions = []
         rewards = []
 
-        while newState!=termState :
+        while startState != termState:
 
             action = policy(startState)
             newState, reward = self.transition(startState, action)
+
             states.append(newState)
             actions.append(action)
             rewards.append(reward)
@@ -94,5 +97,4 @@ class GridWorld():
 
     def setFieldEffects(self, effect, group={}, axis=0):
 
-        self.rowEffects, self.colEffects = (group, None) if axis==0 else (None, group)
-
+        self.rowEffects, self.colEffects = (group, None) if axis == 0 else (None, group)
