@@ -1,7 +1,7 @@
 # Grid-World
 > A Grid World for testing classic Reinforcement Learning Algorithms
 
-This repository aims to build an API for the gridworld and it's variations most often used in RL. The aim is to make it simple, fast and usable for research & education. This is a still in-development repository. Contributions and ideas will be looked forward to.
+This repository aims to build an API for the gridworld and it's variations most often used in RL. The aim is to make it simple, fast and usable for research & education. This is a still-in-development repository. Contributions and ideas will be looked forward to.
 
 ![](header.png)
 
