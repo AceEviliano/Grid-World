@@ -91,3 +91,8 @@ class GridWorld():
             rewards.append(reward)
 
         return states, actions, rewards
+
+    def setFieldEffects(self, effect, group={}, axis=0):
+
+        self.rowEffects, self.colEffects = (group, None) if axis==0 else (None, group)
+
