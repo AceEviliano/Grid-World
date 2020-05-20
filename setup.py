@@ -17,7 +17,7 @@ setup(
     url = 'https://github.com/AceEviliano/Grid-World',
     author = 'Rishi S Rao',
     author_email = 'harishi.ace@gmail.com',
-    license = 'GPLv3',
+    license = 'GPLv3.0',
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
