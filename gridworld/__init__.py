@@ -1,1 +1,1 @@
-from .World import World
+from .World import GridWorld
