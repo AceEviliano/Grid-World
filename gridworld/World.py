@@ -1,10 +1,11 @@
 import numpy as np
+from abc import abstractmethod
 import matplotlib.pyplot as plt
 
 class GridWorld():
 
     def __init__(self, row=4, col=4, rewards={},
-                 defaultReward=0, transitionTable=None):
+                 defaultReward=0, transitionTable=None, stateEffects=None):
 
         self.row = row
         self.col = col
@@ -81,8 +82,13 @@ class GridWorld():
 
     def transition(self, state, action):
 
-        new_state = self.transitionTable[state][action]
-        return new_state, self.rewards[new_state]
+        newState = self.transitionTable[state][action]
+        reward = self.rewards[newState]
+
+        if self.stateEffects not None:
+            newState, reward = self.stateEffects(newState, reward)
+
+        return newState, reward
 
     def getEpisode(self, startState, termState, policy):
 
@@ -104,3 +110,6 @@ class GridWorld():
             rewards.append(reward)
 
         return states, actions, rewards
+
+
+
