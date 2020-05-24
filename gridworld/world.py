@@ -85,9 +85,6 @@ class GridWorld():
         newState = self.transitionTable[state][action]
         reward = self.rewards[newState]
 
-        if self.stateEffects not None:
-            newState, reward = self.stateEffects(newState, reward)
-
         return newState, reward
 
     def getEpisode(self, startState, termState, policy):
