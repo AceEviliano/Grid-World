@@ -1,5 +1,5 @@
 import numpy as np
-from ..World import GridWorld as World
+from ..world import GridWorld as World
 
 inp_path = 'gridworld/test/inp/'
 
