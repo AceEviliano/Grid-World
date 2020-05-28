@@ -1,7 +1,8 @@
+from os import path
 import numpy as np
 from ..world import GridWorld as World
 
-inp_path = 'gridworld/test/inp/'
+inp_path = path.abspath('./gridworld/test/inp')
 
 reward = {2:-3, 4:-2, 5:-2}
 default_reward = -1
@@ -13,44 +14,26 @@ def policy(state):
 
 def test_init():
 
-	w = World(3, 3, reward, default_reward)
-	test_w = np.load(inp_path+'GW33.npy')
+	w = World((3, 3), reward, default_reward)
+	test_w = np.load( path.join(inp_path,'GW33.npy') )
 	assert np.sum( w.transitionTable - test_w ) == 0
 
-	w = World(3, 2, reward, default_reward)
-	test_w = np.load(inp_path+'GW32.npy')
+	w = World((3, 2), reward, default_reward)
+	test_w = np.load( path.join(inp_path,'GW32.npy') )
 	assert np.sum( w.transitionTable - test_w ) == 0
 
-	w = World(2, 3, reward, default_reward)
-	test_w = np.load(inp_path+'GW32.npy')
+	w = World((2, 3), reward, default_reward)
+	test_w = np.load( path.join(inp_path,'GW32.npy') )
 	assert np.sum( w.transitionTable - test_w ) == 0
 
-	w = World(3, 2, reward, default_reward)
-	x = np.load(inp_path+'GWrewards32.npy')
+	w = World((3, 2), reward, default_reward)
+	x = np.load( path.join(inp_path,'GWrewards32.npy') )
 	assert np.sum( w.rewards - x ) == 0
-
-def test_getEpisode():
-
-	w = World(3, 2, reward, default_reward)
-	
-	st, ac, re = w.getEpisode(0, 5, policy)
-	results = np.stack((st,ac,re), axis=0)
-
-	x = np.load(inp_path+'GWgetEpisode32.npy')
-
-	assert np.sum( results - x ) == 0
-
-def test_getEpisode2():
-	
-	w = World(3, 2, reward, default_reward)
-
-	st, ac, re = w.getEpisode(0, 1, policy)
-	results = np.stack((st,ac,re), axis=0)
 
 
 def test_transition():
 
-	w = World(3, 2, reward, default_reward)
+	w = World((3, 2), reward, default_reward)
 	
 	a, r = w.transition(0, 0)
 	assert a == 0

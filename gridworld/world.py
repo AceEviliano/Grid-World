@@ -4,27 +4,28 @@ import matplotlib.pyplot as plt
 
 class GridWorld():
 
-    def __init__(self, row=4, col=4, rewards={},
-                 defaultReward=0, transitionTable=None, stateEffects=None):
+    def __init__(self, dim=(4, 4), rewards={},
+                 defaultReward=0, transitionTable=None):
 
-        self.row = row
-        self.col = col
-        self.dim = (row, col)
+        self.dim = dim
+        self.row, self.col = dim
         self.defaultReward = defaultReward
 
         self.actions = range(4)
-        self.states = range(row * col)
+        self.states = range(self.row * self.col)
         self.rewards = self.__setRewards__(rewards)
         self.transitionTable = transitionTable if transitionTable is not None else self.__setTransitions__()
         
         return
 
+    def __call__(self, state, action):
+        return self.transition(state, action)
+
     def __setRewards__(self, rewards):
 
         rewardTable = []
 
-        for state in self.states:
-        
+        for state in self.states:       
             try:
                 r = rewards[state]
             except:
@@ -37,7 +38,6 @@ class GridWorld():
     def __setTransitions__(self):
 
         transitionTable = []
-
         for state in self.states:
             stateTransitions = [ self.__transitionFunction__(state, action) for action in self.actions ]
             transitionTable.append(stateTransitions)
@@ -76,8 +76,6 @@ class GridWorld():
             if new_state < 0 or new_state >= row * col:
                 new_state = state
 
-        #print(f"oldstate : {state},  action : {action},  newstate : {new_state}")
-
         return new_state
 
     def transition(self, state, action):
@@ -86,27 +84,5 @@ class GridWorld():
         reward = self.rewards[newState]
 
         return newState, reward
-
-    def getEpisode(self, startState, termState, policy):
-
-        states = []
-        actions = []
-        rewards = []
-        newState = startState
-        inx = 0
-
-        while newState != termState:
-            
-            action = policy(newState)
-            newState, reward = self.transition(newState, action)
-
-            assert newState not in states, 'Termination not possible, Cyclic policy'
-
-            states.append(newState)
-            actions.append(action)
-            rewards.append(reward)
-
-        return states, actions, rewards
-
 
 
