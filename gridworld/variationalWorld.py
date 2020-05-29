@@ -1,4 +1,18 @@
 class VariationalWorld():
+	"""
+	A framework to apply effects to the world object.
+
+	Variational World takes in a world and applies pre-transition &
+	post-transition effects on state action and reward. If these are left
+	unmentioned it is same as the world object.
+
+	Example
+		>>> rewards = {0:0, 2:-3, 5:-3, 6:-3, 9:-2, 12:-2}
+		>>> w = GridWorld((4, 4), rewards=rewards, defaultReward=-1)
+		>>> eff = SomeEffect(w, *kwargs)
+		>>> vw = VariationalWorld(w, postEffect=eff)
+		>>> vw(state, action)
+	"""
 
 	def __init__(self, world, postEffect=None, preEffect=None):
 
@@ -41,9 +55,21 @@ class VariationalWorld():
 		return self.__stateBuffer__, self.__rewardBuffer__
 
 	def getBuffer(self):
+		"""
+		Returns the buffer before or after the transition.
+
+		Returns
+			state, action, reward
+		"""
 		return self.buff
 
 	def setBuffer(self, state, action, reward):
+		"""
+		Sets the buffer before or after the transition.
+
+		Parameters
+			state, action, reward
+		"""
 		self.__stateBuffer__, self.__actionBuffer__, self.__rewardBuffer__ = state, action, reward
 
 
@@ -53,6 +79,17 @@ class VariationalWorld():
 		self.postEffect = postEffect
 
 	def transition(self, state, action, prevReward=None):
+		"""
+		Performs transition in the variation of the world.
+
+		Parameters
+			state : state of an agent.
+
+			action : action that the agent takes int that state
+
+			preReward (optional): takes in the reward of the previous time step, can be used 
+			for transition effects.
+		"""
 
 		# print(f'in variational transition-  s:{state}  a:{action}  r:{prevReward}')
 		state, action = self.__applyPreEffects__(state, action, prevReward, self.buff)
